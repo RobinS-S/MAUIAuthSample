@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Shell
+    x:Class="MauiXamlClient.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:auth="clr-namespace:MauiXamlClient.Auth.Pages"
+    xmlns:authmodels="clr-namespace:MauiXamlClient.Auth"
+    xmlns:forecastOverview="using:MauiXamlClient.Pages.ForecastOverview"
+    xmlns:forecastToday="using:MauiXamlClient.Pages.ForecastToday"
+    Title="MauiXamlClient"
+    x:DataType="authmodels:AuthViewModel"
+    FlyoutBehavior="Flyout">
+
+    <ShellContent
+        Title="Forecast today"
+        ContentTemplate="{DataTemplate forecastToday:ForecastTodayPage}"
+        Route="ForecastTodayPage" />
+
+    <ShellContent
+        Title="Forecast overview"
+        ContentTemplate="{DataTemplate forecastOverview:ForecastOverviewPage}"
+        Route="ForecastOverviewPage" />
+
+    <ShellContent
+        Title="Log in"
+        ContentTemplate="{DataTemplate auth:LoginPage}"
+        IsVisible="{Binding LoggedIn, Converter={StaticResource InvertedBoolConverter}}" />
+
+    <ShellContent
+        Title="Log out"
+        ContentTemplate="{DataTemplate auth:LogoutPage}"
+        IsVisible="{Binding LoggedIn}" />
+
+</Shell>

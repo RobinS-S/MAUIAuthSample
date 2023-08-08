@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentPage
+    x:Class="MauiXamlClient.Pages.ForecastOverview.ForecastOverviewPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converters="clr-namespace:MauiXamlClient.Converters"
+    xmlns:local="clr-namespace:MauiXamlClient.Pages.ForecastOverview"
+    xmlns:shared="clr-namespace:AuthenticationSamples.Shared;assembly=AuthenticationSamples.Shared"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    x:DataType="local:ForecastOverviewViewModel">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <toolkit:IsNotNullConverter x:Key="IsNotNullConverter" />
+            <toolkit:IsNullConverter x:Key="IsNullConverter" />
+            <converters:TemperatureColorConverter x:Key="TempColorConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <VerticalStackLayout VerticalOptions="Center">
+            <Label
+                FontAttributes="Bold"
+                FontSize="Medium"
+                HorizontalOptions="Center"
+                TextColor="{StaticResource Primary}">
+                This page is accessible by anyone who is logged in.
+            </Label>
+
+            <ActivityIndicator
+                HeightRequest="150"
+                HorizontalOptions="Center"
+                IsRunning="True"
+                IsVisible="{Binding ForecastOverview, Converter={StaticResource IsNullConverter}}"
+                WidthRequest="150"
+                Color="{StaticResource Primary}" />
+
+            <CollectionView
+                HorizontalOptions="Center"
+                IsVisible="{Binding ForecastOverview, Converter={StaticResource IsNotNullConverter}}"
+                ItemsSource="{Binding ForecastOverview}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="shared:WeatherForecast">
+                        <StackLayout Padding="10" Spacing="10">
+                            <Label
+                                FontSize="Large"
+                                HorizontalOptions="CenterAndExpand"
+                                Text="{Binding Date}" />
+
+                            <StackLayout HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
+                                <Label
+                                    x:Name="TemperatureLabel"
+                                    FontSize="Medium"
+                                    Text="{Binding TemperatureC}"
+                                    TextColor="{Binding TemperatureC, Converter={StaticResource TempColorConverter}}" />
+                                <Label
+                                    FontSize="Medium"
+                                    Text="℃"
+                                    VerticalOptions="CenterAndExpand" />
+                            </StackLayout>
+
+                            <StackLayout HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
+                                <Label
+                                    FontSize="Medium"
+                                    Text="{Binding TemperatureF}"
+                                    TextColor="{Binding Source={x:Reference TemperatureLabel}, Path=TextColor}"
+                                    VerticalOptions="CenterAndExpand" />
+                                <Label
+                                    FontSize="Medium"
+                                    Text="℉"
+                                    VerticalOptions="CenterAndExpand" />
+                            </StackLayout>
+
+                            <Label
+                                FontSize="Medium"
+                                HorizontalOptions="CenterAndExpand"
+                                Text="{Binding Summary}" />
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

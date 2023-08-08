@@ -1,0 +1,1 @@
+﻿Remove-Migration -Force -Project AuthenticationSample -StartupProject AuthenticationSample

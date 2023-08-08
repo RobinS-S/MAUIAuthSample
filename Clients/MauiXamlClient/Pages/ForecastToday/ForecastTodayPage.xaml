@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentPage
+    x:Class="MauiXamlClient.Pages.ForecastToday.ForecastTodayPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converters="clr-namespace:MauiXamlClient.Converters"
+    xmlns:local="clr-namespace:MauiXamlClient.Pages.ForecastToday"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    x:DataType="local:ForecastTodayViewModel">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <toolkit:IsNotNullConverter x:Key="IsNotNullConverter" />
+            <toolkit:IsNullConverter x:Key="IsNullConverter" />
+            <converters:TemperatureColorConverter x:Key="TempColorConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <VerticalStackLayout VerticalOptions="Center">
+            <Label
+                FontAttributes="Bold"
+                FontSize="Medium"
+                HorizontalOptions="Center"
+                TextColor="{StaticResource Primary}">
+                This page is accessible by anyone regardless of being logged in.
+            </Label>
+
+            <ActivityIndicator
+                HeightRequest="150"
+                HorizontalOptions="Center"
+                IsRunning="True"
+                IsVisible="{Binding ForecastToday, Converter={StaticResource IsNullConverter}}"
+                WidthRequest="150"
+                Color="{StaticResource Primary}" />
+
+            <StackLayout
+                Padding="20"
+                IsVisible="{Binding ForecastToday, Converter={StaticResource IsNotNullConverter}}"
+                Spacing="20">
+
+                <Label
+                    FontSize="Large"
+                    HorizontalOptions="CenterAndExpand"
+                    Text="{Binding ForecastToday.Date, FallbackValue=''}" />
+
+                <StackLayout HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
+                    <Label
+                        FontSize="Medium"
+                        Text="{Binding ForecastToday.TemperatureC, FallbackValue=''}"
+                        TextColor="{Binding ForecastToday.TemperatureC, FallbackValue='', Converter={StaticResource TempColorConverter}}" />
+                    <Label
+                        FontSize="Medium"
+                        Text="℃"
+                        VerticalOptions="CenterAndExpand" />
+                </StackLayout>
+
+                <StackLayout HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
+                    <Label
+                        FontSize="Medium"
+                        Text="{Binding ForecastToday.TemperatureF, FallbackValue=''}"
+                        TextColor="{Binding ForecastToday.TemperatureC, FallbackValue='', Converter={StaticResource TempColorConverter}}" />
+                    <Label
+                        FontSize="Medium"
+                        Text="℉"
+                        VerticalOptions="CenterAndExpand" />
+                </StackLayout>
+
+                <Label
+                    FontSize="Medium"
+                    HorizontalOptions="CenterAndExpand"
+                    Text="{Binding ForecastToday.Summary, FallbackValue=''}" />
+            </StackLayout>
+
+            <Button
+                x:Name="ForecastOverviewBtn"
+                Clicked="OnForecastOverviewClicked"
+                HorizontalOptions="Center"
+                SemanticProperties.Hint="Go to forecast overview"
+                Text="Click to go to forecast overview, you must be logged in" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

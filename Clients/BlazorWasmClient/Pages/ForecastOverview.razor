@@ -1,0 +1,72 @@
+﻿@page "/forecastoverview"
+@using BlazorWasmClient.Http.Interfaces
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@*This attribute makes sure that the page is only accessible when authenticated. The App.razor uses the RedirectToLogin.razor to redirect you to login and includes the return URL.*@
+@attribute [Authorize]
+@inject IAuthorizedHttpClient AuthorizedHttp
+
+<PageTitle>Forecast overview</PageTitle>
+
+<div class="container my-5">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="display-4 text-center">Weather forecast overview</h1>
+
+            <p class="lead text-center">The list of forecasts is fetched from the API endpoint that requires authentication. This page will redirect to login when clicked if you're not logged in already.</p>
+
+            @if (_forecasts == null)
+            {
+                <div class="alert alert-info" role="alert">
+                    <em>Loading...</em>
+                </div>
+            }
+            else
+            {
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <thead class="table-light">
+                        <tr>
+                            <th scope="col">Date</th>
+                            <th scope="col">Temp. (C)</th>
+                            <th scope="col">Temp. (F)</th>
+                            <th scope="col">Summary</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach (var forecast in _forecasts)
+                        {
+                            var tempClassC = forecast.TemperatureC < 0 ? "text-primary" : forecast.TemperatureC < 20 ? "text-warning" : "text-danger";
+                            var tempClassF = forecast.TemperatureF < 32 ? "text-primary" : forecast.TemperatureF < 68 ? "text-warning" : "text-danger";
+
+                            <tr>
+                                <td>@forecast.Date.ToShortDateString()</td>
+                                <td class="@tempClassC">@forecast.TemperatureC &#8451;</td>
+                                <td class="@tempClassF">@forecast.TemperatureF &#8457;</td>
+                                <td>@forecast.Summary</td>
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@code {
+    private WeatherForecast[]? _forecasts;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            _forecasts = await AuthorizedHttp.Client.GetFromJsonAsync<WeatherForecast[]>("api/WeatherForecast/all");
+        }
+        catch (AccessTokenNotAvailableException exception)
+        {
+            exception.Redirect();
+        }
+    }
+
+}

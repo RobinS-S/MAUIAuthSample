@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33815.320
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthenticationSample", "API\AuthenticationSample.csproj", "{651FBAD7-9CE9-4CF8-A83C-36C24AF3114D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorWasmClient", "Clients\BlazorWasmClient\BlazorWasmClient.csproj", "{0C2DAE78-C366-4FF5-BA96-C8943401CB64}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthenticationSamples.Shared", "Shared\AuthenticationSamples.Shared.csproj", "{27C95309-6BC2-433F-AFFB-A18BC8190703}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Clients", "Clients", "{BB5D8207-C960-40BF-A447-B8AF13C45D68}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MauiXamlClient", "Clients\MauiXamlClient\MauiXamlClient.csproj", "{6A461D0D-28EE-4817-8218-68CDF29B2786}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Experimental|Any CPU = Experimental|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{651FBAD7-9CE9-4CF8-A83C-36C24AF3114D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{651FBAD7-9CE9-4CF8-A83C-36C24AF3114D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{651FBAD7-9CE9-4CF8-A83C-36C24AF3114D}.Experimental|Any CPU.ActiveCfg = Release|Any CPU
+		{651FBAD7-9CE9-4CF8-A83C-36C24AF3114D}.Experimental|Any CPU.Build.0 = Release|Any CPU
+		{651FBAD7-9CE9-4CF8-A83C-36C24AF3114D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{651FBAD7-9CE9-4CF8-A83C-36C24AF3114D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C2DAE78-C366-4FF5-BA96-C8943401CB64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C2DAE78-C366-4FF5-BA96-C8943401CB64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C2DAE78-C366-4FF5-BA96-C8943401CB64}.Experimental|Any CPU.ActiveCfg = Release|Any CPU
+		{0C2DAE78-C366-4FF5-BA96-C8943401CB64}.Experimental|Any CPU.Build.0 = Release|Any CPU
+		{0C2DAE78-C366-4FF5-BA96-C8943401CB64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C2DAE78-C366-4FF5-BA96-C8943401CB64}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27C95309-6BC2-433F-AFFB-A18BC8190703}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27C95309-6BC2-433F-AFFB-A18BC8190703}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27C95309-6BC2-433F-AFFB-A18BC8190703}.Experimental|Any CPU.ActiveCfg = Release|Any CPU
+		{27C95309-6BC2-433F-AFFB-A18BC8190703}.Experimental|Any CPU.Build.0 = Release|Any CPU
+		{27C95309-6BC2-433F-AFFB-A18BC8190703}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27C95309-6BC2-433F-AFFB-A18BC8190703}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A461D0D-28EE-4817-8218-68CDF29B2786}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A461D0D-28EE-4817-8218-68CDF29B2786}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A461D0D-28EE-4817-8218-68CDF29B2786}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{6A461D0D-28EE-4817-8218-68CDF29B2786}.Experimental|Any CPU.ActiveCfg = Release|Any CPU
+		{6A461D0D-28EE-4817-8218-68CDF29B2786}.Experimental|Any CPU.Build.0 = Release|Any CPU
+		{6A461D0D-28EE-4817-8218-68CDF29B2786}.Experimental|Any CPU.Deploy.0 = Release|Any CPU
+		{6A461D0D-28EE-4817-8218-68CDF29B2786}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A461D0D-28EE-4817-8218-68CDF29B2786}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A461D0D-28EE-4817-8218-68CDF29B2786}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0C2DAE78-C366-4FF5-BA96-C8943401CB64} = {BB5D8207-C960-40BF-A447-B8AF13C45D68}
+		{6A461D0D-28EE-4817-8218-68CDF29B2786} = {BB5D8207-C960-40BF-A447-B8AF13C45D68}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {59DC627A-5720-4D5A-92A6-B0D4420F3625}
+	EndGlobalSection
+EndGlobal

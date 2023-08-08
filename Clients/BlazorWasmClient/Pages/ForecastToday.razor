@@ -1,0 +1,51 @@
+﻿@page "/forecast"
+@using BlazorWasmClient.Http.Interfaces
+
+@inject IAnonymousHttpClient AnonymousHttp
+
+<PageTitle>Current forecast</PageTitle>
+
+<div class="container my-5">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="display-4 text-center">Current forecast</h1>
+
+            <p class="lead text-center">The current forecast is fetched from the API endpoint that is accessible anonymously. This page is always accessible.</p>
+
+            @if (_currentForecast == null)
+            {
+                <div class="alert alert-info" role="alert">
+                    <em>Loading...</em>
+                </div>
+            }
+            else
+            {
+                var tempClassC = _currentForecast.TemperatureC < 0 ? "text-primary" : _currentForecast.TemperatureC < 20 ? "text-warning" : "text-danger";
+                var tempClassF = _currentForecast.TemperatureF < 32 ? "text-primary" : _currentForecast.TemperatureF < 68 ? "text-warning" : "text-danger";
+
+                <div class="card text-center">
+                    <div class="card-header">
+                        Forecast for @_currentForecast.Date.ToShortDateString()
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Summary: @_currentForecast.Summary</h5>
+                        <p class="card-text">
+                            <span class="temp-c @tempClassC">@_currentForecast.TemperatureC &#8451;</span> |
+                            <span class="temp-f @tempClassF">@_currentForecast.TemperatureF &#8457;</span>
+                        </p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@code {
+    private WeatherForecast? _currentForecast;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _currentForecast = await AnonymousHttp.Client.GetFromJsonAsync<WeatherForecast>("api/WeatherForecast");
+    }
+
+}

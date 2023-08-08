@@ -1,0 +1,1 @@
+Add the CRT file to your "Trusted Root Certification Authorities"  to make sure you don't get any SSL errors. This also counts for other devices such as Android.

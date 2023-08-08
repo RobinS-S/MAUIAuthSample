@@ -1,0 +1,29 @@
+version: '3.8'
+services:
+  db:
+    image: docker.io/bitnami/mysql:8.0
+    restart: always
+    environment:
+      - MYSQL_DATABASE=auth
+      - MYSQL_ROOT_PASSWORD=test
+    ports:
+      - '3306:3306'
+    volumes:
+      - ./_db_data:/bitnami/mysql/data
+    healthcheck:
+      test: ['CMD', '/opt/bitnami/scripts/mysql/healthcheck.sh']
+      interval: 15s
+      timeout: 5s
+      retries: 6
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: pma
+    depends_on:
+    - db
+    environment:
+    - PMA_HOST=db
+    - PMA_PORT=3306
+    - PMA_ARBITRARY=0
+    restart: always
+    ports:
+    - 8081:80
